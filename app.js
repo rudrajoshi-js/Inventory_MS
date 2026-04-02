@@ -306,6 +306,7 @@ const loadData = async () => {
 
   schools = (schoolRows || []).map((s) => ({
     id: s.school_id,
+    userId: s.user_id,
     name: s.name,
     startDeadline: s.start_deadline,
     endDeadline: s.end_deadline,
@@ -628,7 +629,7 @@ function openSchoolSettings() {
 async function addKit() {
   if (!currentSchool) return;
 
-  if (!isAdmin() && currentSchool.user_id !== currentUserId) {
+  if (!isAdmin() && currentSchool.userId !== currentUserId) {
     alert("Not allowed");
     return;
   }
@@ -1018,10 +1019,10 @@ function updateSaveStatus() {
   }
 }
 
-// ✅ Save to part_counts
+// Save to part_counts
 async function saveChanges() {
   if (!currentKit) return;
-  if (!isAdmin() && currentSchool.user_id !== currentUserId) {
+  if (!isAdmin() && currentSchool.userId !== currentUserId) {
     alert("Not allowed");
     return;
   }
