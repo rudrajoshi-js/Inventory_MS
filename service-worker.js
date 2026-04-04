@@ -1,4 +1,4 @@
-const CACHE_NAME = "ims-cache-v8"; // bump this every time you change SW
+const CACHE_NAME = "ims-cache-v9"; // bump this every time you change SW
 const ASSETS = [
   "./",
   "./index.html",

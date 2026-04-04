@@ -927,8 +927,27 @@
     @media (max-width: 360px) { .kit-grid { grid-template-columns: 1fr; } }
 
     /* ===== DASHBOARD ===== */
+    #dashboard-screen {
+      max-width: 100%;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    #dashboard-screen .header,
+    #dashboard-screen .dash-stats,
+    #dashboard-screen .dash-chart-card,
+    #dashboard-screen .dash-section-title,
+    #dashboard-screen .dash-missing-list {
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     #dashboard-screen .header {
-      padding-top: 16px;
+      padding: 12px 20px 8px;
+    }
+    #dashboard-screen .page-title {
+      font-size: 22px;
     }
     .dash-stats {
       display: grid;
