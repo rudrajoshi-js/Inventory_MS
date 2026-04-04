@@ -928,11 +928,17 @@
 
     /* ===== DASHBOARD ===== */
     #dashboard-screen {
-      max-width: 100%;
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      background: var(--bg);
+      overflow-y: auto;
+    }
+    #dashboard-screen .header {
+      padding: 12px 20px 8px;
+    }
+    #dashboard-screen .page-title {
+      font-size: 22px;
     }
     #dashboard-screen .header,
     #dashboard-screen .dash-stats,
