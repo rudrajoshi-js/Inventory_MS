@@ -926,6 +926,112 @@
     .filters::-webkit-scrollbar, #kit-filters::-webkit-scrollbar { display: none; }
     @media (max-width: 360px) { .kit-grid { grid-template-columns: 1fr; } }
 
+    /* ===== DASHBOARD ===== */
+    #dashboard-screen .header {
+      padding-top: 16px;
+    }
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 0 20px;
+      margin-bottom: 16px;
+    }
+    .dash-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      text-align: center;
+    }
+    .dash-stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .dash-stat-value.accent { color: var(--accent); }
+    .dash-stat-value.success { color: var(--success); }
+    .dash-stat-value.danger { color: var(--danger); }
+    .dash-stat-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .dash-chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 14px;
+      margin: 0 20px 12px;
+    }
+    .dash-chart-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.2px;
+    }
+    .dash-chart-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+    }
+    .dash-chart-wrap canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .dash-missing-list {
+      padding: 0 20px 40px;
+    }
+    .dash-missing-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+    }
+    .dash-missing-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .dash-missing-part {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .dash-missing-detail {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .dash-missing-count {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--danger);
+      background: var(--danger-glow);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+    .dash-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0 20px;
+      margin-bottom: 8px;
+    }
+    .dash-empty {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
     /* ===== SCROLLBAR ===== */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -1011,6 +1117,7 @@
           <div class="menu-sub">Choose where you want to go.</div>
           <div class="menu-actions">
             <button class="btn" onclick="showScreen('school-screen')">Inventory</button>
+            <button class="btn btn-secondary" onclick="if(isAdmin()){showScreen('dashboard-screen')}else{alert('Admin only')}">Dashboard</button>
             <button class="btn btn-secondary" onclick="openAirtable()">Airtable</button>
           </div>
         </div>
@@ -1111,6 +1218,29 @@
     </div>
   </div>
 
+  <!-- Dashboard Screen (Admin Only) -->
+  <div id="dashboard-screen" class="screen">
+    <div class="header">
+      <div class="header-top">
+        <h1 class="page-title">Dashboard</h1>
+        <button class="btn btn-small btn-secondary" onclick="showScreen('menu-screen')" style="width:auto;">← Back</button>
+      </div>
+    </div>
+    <div class="dash-stats" id="dash-stats"></div>
+    <div style="flex:1;overflow-y:auto;">
+      <div class="dash-chart-card">
+        <div class="dash-chart-title">Kit Completion by School</div>
+        <div class="dash-chart-wrap"><canvas id="chart-completion"></canvas></div>
+      </div>
+      <div class="dash-chart-card">
+        <div class="dash-chart-title">Missing Parts by Category</div>
+        <div class="dash-chart-wrap"><canvas id="chart-missing"></canvas></div>
+      </div>
+      <div class="dash-section-title">Top Missing Parts</div>
+      <div class="dash-missing-list" id="dash-missing-list"></div>
+    </div>
+  </div>
+
   <!-- Modals -->
   <div class="modal-overlay" id="add-school-modal">
     <div class="modal">
@@ -1182,6 +1312,7 @@
     });
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
 </body>

@@ -369,6 +369,8 @@ function showScreen(id) {
   } else if (id === "inventory-screen") {
     renderInventory();
     updateInventoryUI();
+  } else if (id === "dashboard-screen") {
+    renderDashboard();
   }
 }
 
@@ -1232,3 +1234,200 @@ window.addEventListener("beforeunload", (e) => {
     e.returnValue = "";
   }
 });
+
+
+// ========== DASHBOARD (Admin Only) ==========
+let completionChart = null;
+let missingChart = null;
+
+function renderDashboard() {
+  if (!isAdmin()) return;
+
+  // --- Stats ---
+  const totalSchools = schools.length;
+  let totalKits = 0;
+  let completedKits = 0;
+  let totalMissing = 0;
+
+  schools.forEach(s => {
+    (s.kits || []).forEach(k => {
+      totalKits++;
+      const status = getKitStatus(s.id, k.id);
+      if (status === "complete") completedKits++;
+      totalMissing += getMissing(s.id, k.id);
+    });
+  });
+
+  document.getElementById("dash-stats").innerHTML = `
+    <div class="dash-stat">
+      <div class="dash-stat-value accent">${totalSchools}</div>
+      <div class="dash-stat-label">Schools</div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-value success">${completedKits}/${totalKits}</div>
+      <div class="dash-stat-label">Kits Done</div>
+    </div>
+    <div class="dash-stat">
+      <div class="dash-stat-value danger">${totalMissing}</div>
+      <div class="dash-stat-label">Missing</div>
+    </div>
+  `;
+
+  // --- Completion Chart ---
+  const schoolNames = schools.map(s => s.name.length > 14 ? s.name.slice(0, 12) + "…" : s.name);
+  const schoolComplete = [];
+  const schoolPending = [];
+  const schoolIssues = [];
+
+  schools.forEach(s => {
+    let comp = 0, pend = 0, iss = 0;
+    (s.kits || []).forEach(k => {
+      const st = getKitStatus(s.id, k.id);
+      if (st === "complete") comp++;
+      else if (st === "issues") iss++;
+      else pend++;
+    });
+    schoolComplete.push(comp);
+    schoolPending.push(pend);
+    schoolIssues.push(iss);
+  });
+
+  const ctxComp = document.getElementById("chart-completion").getContext("2d");
+  if (completionChart) completionChart.destroy();
+  completionChart = new Chart(ctxComp, {
+    type: "bar",
+    data: {
+      labels: schoolNames,
+      datasets: [
+        { label: "Complete", data: schoolComplete, backgroundColor: "rgba(63,185,80,0.7)", borderRadius: 4 },
+        { label: "Pending", data: schoolPending, backgroundColor: "rgba(210,153,34,0.7)", borderRadius: 4 },
+        { label: "Issues", data: schoolIssues, backgroundColor: "rgba(248,81,73,0.7)", borderRadius: 4 },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { color: "#6b7a8d", font: { size: 11, family: "'Plus Jakarta Sans'" }, boxWidth: 12, padding: 12 },
+        },
+      },
+      scales: {
+        x: {
+          stacked: true,
+          ticks: { color: "#6b7a8d", font: { size: 11, family: "'Plus Jakarta Sans'" } },
+          grid: { display: false },
+          border: { display: false },
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: { color: "#6b7a8d", stepSize: 1, font: { size: 11 } },
+          grid: { color: "rgba(255,255,255,0.04)" },
+          border: { display: false },
+        },
+      },
+    },
+  });
+
+  // --- Missing Parts by Category ---
+  const catMissing = {};
+  CATEGORIES.forEach(cat => {
+    let m = 0;
+    schools.forEach(s => {
+      (s.kits || []).forEach(k => {
+        cat.parts.forEach(p => {
+          const d = inventoryData[invKey(k.id, p.id)];
+          if (d && d.end !== undefined && d.end !== "") {
+            const sv = d.start !== "" && d.start !== undefined ? parseInt(d.start) : p.expected;
+            const ev = parseInt(d.end);
+            if (ev < sv) m += sv - ev;
+          }
+        });
+      });
+    });
+    catMissing[cat.name] = m;
+  });
+
+  const catNames = Object.keys(catMissing);
+  const catValues = Object.values(catMissing);
+  const catColors = [
+    "rgba(88,166,255,0.7)", "rgba(163,113,247,0.7)", "rgba(63,185,80,0.7)",
+    "rgba(210,153,34,0.7)", "rgba(248,81,73,0.7)", "rgba(88,166,255,0.4)"
+  ];
+
+  const ctxMiss = document.getElementById("chart-missing").getContext("2d");
+  if (missingChart) missingChart.destroy();
+
+  const hasMissingData = catValues.some(v => v > 0);
+
+  if (hasMissingData) {
+    document.getElementById("chart-missing").style.display = "block";
+    missingChart = new Chart(ctxMiss, {
+      type: "doughnut",
+      data: {
+        labels: catNames,
+        datasets: [{
+          data: catValues,
+          backgroundColor: catColors.slice(0, catNames.length),
+          borderWidth: 0,
+          spacing: 2,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: "65%",
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: { color: "#6b7a8d", font: { size: 11, family: "'Plus Jakarta Sans'" }, boxWidth: 12, padding: 10 },
+          },
+        },
+      },
+    });
+  } else {
+    document.getElementById("chart-missing").style.display = "none";
+    document.getElementById("chart-missing").parentElement.innerHTML = '<div class="dash-empty">No missing parts yet — complete end-of-semester counts to see data here</div>';
+  }
+
+  // --- Top Missing Parts List ---
+  const partMissing = [];
+  schools.forEach(s => {
+    (s.kits || []).forEach(k => {
+      PARTS.forEach(p => {
+        const d = inventoryData[invKey(k.id, p.id)];
+        if (d && d.end !== undefined && d.end !== "") {
+          const sv = d.start !== "" && d.start !== undefined ? parseInt(d.start) : p.expected;
+          const ev = parseInt(d.end);
+          if (ev < sv) {
+            partMissing.push({
+              part: p.name,
+              school: s.name,
+              kit: k.name || "Kit",
+              missing: sv - ev,
+            });
+          }
+        }
+      });
+    });
+  });
+
+  partMissing.sort((a, b) => b.missing - a.missing);
+
+  const listEl = document.getElementById("dash-missing-list");
+  if (!partMissing.length) {
+    listEl.innerHTML = '<div class="dash-empty">No missing parts detected</div>';
+  } else {
+    listEl.innerHTML = partMissing.slice(0, 15).map(item => `
+      <div class="dash-missing-item">
+        <div class="dash-missing-info">
+          <div class="dash-missing-part">${item.part}</div>
+          <div class="dash-missing-detail">${item.school} · ${item.kit}</div>
+        </div>
+        <div class="dash-missing-count">-${item.missing}</div>
+      </div>
+    `).join("");
+  }
+}
