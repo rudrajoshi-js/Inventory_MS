@@ -115,13 +115,13 @@
       display: none;
       flex: 1;
       flex-direction: column;
-      animation: screenIn 0.35s ease-out;
     }
-    .screen.active { display: flex; }
-    @keyframes screenIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+    .screen.active { display: flex; animation: screenFade 0.3s ease-out; }
+    @keyframes screenFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
+    #login-screen.active { animation: none; }
 
     /* ===== HEADER ===== */
     .header { padding: 20px 20px 14px; }
@@ -285,9 +285,10 @@
       animation: cardIn 0.6s ease-out;
     }
     @keyframes cardIn {
-      from { opacity: 0; transform: translateY(20px) scale(0.96); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from { opacity: 0; transform: translate3d(0, 16px, 0) scale(0.97); }
+      to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
     }
+    .login-card { will-change: transform, opacity; }
     .login-card::before {
       content: "";
       position: absolute;
