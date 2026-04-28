@@ -145,6 +145,171 @@ const CATEGORIES = [
 ];
 const PARTS = CATEGORIES.flatMap((c) => c.parts);
 
+const BIO_CATEGORIES = [
+  {
+    name: "Craft Supplies",
+    icon: "🎨",
+    parts: [
+      { id: "flower_foam", name: "Flower Foam", expected: 1,image: "Bio_Images/Flower Foam.png"},
+      { id: "fabric_quarters", name: "Fabric Quarters", expected: 1, image: "Bio_Images/Fabric Quaters.png" },
+      { id: "toothpicks", name: "Toothpicks", expected: 1, image: "Bio_Images/Toothpicks.png" },
+      { id: "hot_glue_refills", name: "Hot Glue Refills", expected: 1, image: "Bio_Images/Hot glue refills.png" },
+      { id: "craft_sticks", name: "Craft Sticks", expected: 1, image: "Bio_Images/Craft Sticks.png" },
+      { id: "masking_tape", name: "Masking Tape", expected: 1, image: "Bio_Images/Masking Tape.png" },
+      { id: "modeling_clay", name: "Modeling Clay", expected: 1, image: "Bio_Images/Modeling Clay.png" },
+      { id: "transparent_tape", name: "Transparent Tape", expected: 1, image: "Bio_Images/Transparent tape.png" },
+      { id: "glue_dots", name: "Glue Dots", expected: 1, image: "Bio_Images/Glue Dots.png" },
+      { id: "colored_construction_paper", name: "Colored Construction Paper", expected: 1, image: "Bio_Images/Colored Construction Paper.png" },
+      { id: "pipe_cleaners", name: "Pipe Cleaners", expected: 1, image: "Bio_Images/Pipe Cleaners.png" },
+      { id: "craft_assortment", name: "Craft Assortment", expected: 1, image: null },
+      { id: "glue_sticks", name: "Glue Sticks", expected: 1, image: "Bio_Images/Glue Sticks.png" },
+      { id: "white_glue", name: "White Glue", expected: 1, image: "Bio_Images/White Glue.png" },
+      { id: "sticky_tack", name: "Sticky Tack", expected: 1, image: "Bio_Images/Sticky tack.png" },
+      { id: "yarn", name: "Yarn", expected: 1, image: null },
+      { id: "pom_poms", name: "Pom Poms", expected: 1, image: "Bio_Images/Pom poms.png" },
+    ],
+  },
+  {
+    name: "Tools",
+    icon: "🛠️",
+    parts: [
+      { id: "hot_glue_guns", name: "Hot Glue Guns", expected: 1, image: "Bio_Images/Hot glue gun.png" },
+      { id: "scissors", name: "Scissors", expected: 1, image: "Bio_Images/Scissors.png" },
+      { id: "sieves", name: "Sieves", expected: 1, image: "Bio_Images/Sieves.png" },
+      { id: "dowel_rod", name: "Dowel Rod", expected: 1, image: "Bio_Images/Dowel Rod.png" },
+      { id: "spoons", name: "Spoons", expected: 1, image: "Bio_Images/Spoons.png" },
+      { id: "straw_launcher", name: "Straw Launcher", expected: 1, image: "Bio_Images/Straw Lancher.png" },
+      { id: "balances", name: "Balances", expected: 1, image: "Bio_Images/Balances.png" },
+      { id: "calculators", name: "Calculators", expected: 1, image: "Bio_Images/Calculators.png" },
+      { id: "stopwatch", name: "Stopwatch", expected: 1, image: "Bio_Images/Stopwatch.png" },
+      { id: "tape_measure", name: "Tape Measure", expected: 1, image: "Bio_Images/Tape Measure.png" },
+      { id: "hole_punch", name: "Hole Punch", expected: 1, image: "Bio_Images/Hole punch.png" },
+    ],
+  },
+  {
+    name: "Stationery",
+    icon: "✏️",
+    parts: [
+      { id: "index_cards", name: "Index Cards", expected: 1, image: "Bio_Images/Index Cards.png" },
+      { id: "stem_journals", name: "STEM Journals", expected: 1, image: "Bio_Images/STEM Journals.png" },
+      { id: "markers", name: "Markers", expected: 1, image: "Bio_Images/Markers.png" },
+      { id: "pencils", name: "Pencils", expected: 1, image: "Bio_Images/Pencils.png" },
+      { id: "rulers", name: "Rulers", expected: 1, image: "Bio_Images/Rulers.png" },
+      { id: "colored_pencils", name: "Colored Pencils", expected: 1, image: "Bio_Images/Colored Pencils.png" },
+      { id: "white_paper", name: "White Paper", expected: 1, image: "Bio_Images/White Paper.png" },
+      { id: "graph_paper", name: "Graph Paper", expected: 1, image: "Bio_Images/Graph Paper.png" },
+      { id: "white_butcher_paper", name: "White Butcher Paper", expected: 1, image: "Bio_Images/White Butcher Paper.png" },
+      { id: "sharpie_pens", name: "Sharpie Pens", expected: 1, image: "Bio_Images/Sharpie pens.png" },
+      { id: "cardstock", name: "Cardstock", expected: 1, image: "Bio_Images/Cardstock.png" },
+      { id: "gorongosa_printed_cards", name: "Gorongosa Printed Cards", expected: 1, image: null },
+      { id: "erasable_markers", name: "Erasable Markers", expected: 1, image: "Bio_Images/Erasable markers.png" },
+    ],
+  },
+  {
+    name: "Lab Equipment",
+    icon: "🧪",
+    parts: [
+      { id: "separatory_funnel", name: "Separatory Funnel", expected: 1, image: "Bio_Images/Separatory funnel.png" },
+      { id: "ph_paper", name: "pH Paper", expected: 1, image: "Bio_Images/pH Paper.png" },
+      { id: "gallon_jug", name: "Gallon Jug", expected: 1, image: "Bio_Images/gallon jug.png" },
+      { id: "graduated_cylinder", name: "Graduated Cylinder", expected: 1, image: "Bio_Images/Graduated cylinder.png" },
+      { id: "bucket", name: "Bucket", expected: 1, image: "Bio_Images/Bucket.png" },
+      { id: "clear_cups", name: "Clear Cups", expected: 1, image: "Bio_Images/ClearCups.png" },
+      { id: "syringe", name: "Syringe", expected: 1, image: "Bio_Images/Syringe.png" },
+      { id: "lamps", name: "Lamps", expected: 1, image: "Bio_Images/Lamps.png" },
+      { id: "lamp_bulbs", name: "Lamp Bulbs", expected: 1, image: "Bio_Images/LampBulbs.png" },
+      { id: "reusable_sandwich_bags", name: "Reusable Sandwich Bags", expected: 1, image: "Bio_Images/Reuseable sandwich bags.png" },
+      { id: "beakers_200ml", name: "200 mL Beakers", expected: 1, image: "Bio_Images/200ml Beakers.png" },
+      { id: "glass_stirring_rods", name: "Glass Stirring Rods", expected: 1, image: "Bio_Images/Glass stirring rods.png" },
+      { id: "test_tubes", name: "Test Tubes", expected: 1, image: "Bio_Images/Test Tubes.png" },
+      { id: "test_tube_rack", name: "Test Tube Rack", expected: 1, image: "Bio_Images/TestTube Rack.png" },
+      { id: "hot_plate", name: "Hot Plate", expected: 1, image: "Bio_Images/HotPlate.png" },
+      { id: "large_beaker", name: "Large Beaker", expected: 1, image: "Bio_Images/Large beaker.png" },
+      { id: "test_tube_clamps", name: "Test Tube Clamps", expected: 1, image: "Bio_Images/TestTubeClamps.png" },
+      { id: "hot_mitt", name: "Hot Mitt", expected: 1, image: "Bio_Images/Hot Mitt.png" },
+      { id: "eye_droppers", name: "Eye Droppers", expected: 1, image: "Bio_Images/EyeDroppers.png" },
+    ],
+  },
+  {
+    name: "Lab Materials",
+    icon: "🧫",
+    parts: [
+      { id: "bottles_1_liter", name: "1 Liter Bottles", expected: 2, image: "Bio_Images/1 Liter Bottle x 2 per team.png" },
+      { id: "gravel", name: "Gravel", expected: 1, image: "Bio_Images/Gravel.png" },
+      { id: "sand", name: "Sand", expected: 1, image: "Bio_Images/Sand.png" },
+      { id: "pepper", name: "Pepper", expected: 1, image: "Bio_Images/Pepper.png" },
+      { id: "pasta_dry_macaroni", name: "Pasta", expected: 1, image: "Bio_Images/Pasta.png" },
+      { id: "food_coloring", name: "Food Coloring", expected: 1, image: "Bio_Images/FoodColoring.png" },
+      { id: "pantyhose", name: "Pantyhose", expected: 1, image: "Bio_Images/Pantyhose.png" },
+      { id: "sponges", name: "Sponges", expected: 1, image: "Bio_Images/Sponges.png" },
+      { id: "cotton", name: "Cotton", expected: 1, image: "Bio_Images/Cotton.png" },
+      { id: "cheesecloth", name: "Cheesecloth", expected: 1, image: "Bio_Images/Cheesecloth.png" },
+      { id: "rubberbands", name: "Rubberbands", expected: 1, image: "Bio_Images/Rubberbands.png" },
+      { id: "activated_charcoal", name: "Activated Charcoal", expected: 1, image: "Bio_Images/Activated Charcoal (rinsed).png" },
+      { id: "tub_to_catch_water", name: "Tub to Catch Water", expected: 1, image: "Bio_Images/Tub to catch water.png" },
+      { id: "dry_yeast", name: "Dry Yeast", expected: 1, image: null },
+      { id: "antacid", name: "Antacid", expected: 1, image: "Bio_Images/Antacid.png" },
+      { id: "sugar", name: "Sugar", expected: 1, image: "Bio_Images/Sugar.png" },
+      { id: "eraser_tips", name: "Eraser Tips", expected: 1, image: "Bio_Images/Eraser Tips.png" },
+      { id: "fresh_spinach_leaves", name: "Fresh Spinach Leaves", expected: 1, image: null },
+      { id: "dawn_dish_soap", name: "Dawn Dish Soap", expected: 1, image: "Bio_Images/Dawn Dish Soap.png" },
+      { id: "fresh_strawberries", name: "Fresh Strawberries", expected: 1, image: null },
+      { id: "liquid_egg_whites", name: "Liquid Egg Whites", expected: 1, image: null },
+      { id: "cooking_oil", name: "Cooking Oil", expected: 1, image: "Bio_Images/CookingOil.png" },
+      { id: "paper_towels", name: "Paper Towels", expected: 1, image: "Bio_Images/PaperTowels.png" },
+      { id: "coffee_filters", name: "Coffee Filters", expected: 1, image: "Bio_Images/CoffeeFilters.png" },
+      { id: "popcorn", name: "Popcorn", expected: 1, image: "Bio_Images/Popcorn.png" },
+    ],
+  },
+  {
+    name: "Lab Chemicals",
+    icon: "⚗️",
+    parts: [
+      { id: "corn_syrup", name: "Corn Syrup", expected: 1, image: "Bio_Images/CornSyrup.png" },
+      { id: "vinegar", name: "Vinegar", expected: 1, image: "Bio_Images/Vinegar.png" },
+      { id: "baking_soda", name: "Baking Soda", expected: 1, image: "Bio_Images/Baking Soda.png" },
+      { id: "non_iodized_salt", name: "Non-Iodized Salt", expected: 1, image: "Bio_Images/Non-iodized salt.png" },
+      { id: "isopropyl_alcohol_99", name: "99% Isopropyl Alcohol", expected: 1, image: "Bio_Images/Isopropyl alcohol.png" },
+      { id: "biuret_reagent", name: "Biuret Reagent", expected: 1, image: "Bio_Images/BiuretReagent.png" },
+      { id: "benedicts_solution", name: "Benedicts Solution", expected: 1, image: "Bio_Images/BenedictsSolution.png" },
+      { id: "iodine_solution", name: "Iodine Solution", expected: 1, image: "Bio_Images/IodineSolution.png" },
+      { id: "glucose_solution", name: "Glucose Solution", expected: 1, image: "Bio_Images/GlucoseSolution.png" },
+      { id: "starch_solution", name: "Starch Solution", expected: 1, image: "Bio_Images/StarchSolution.png" },
+    ],
+  },
+  {
+    name: "Activity Props",
+    icon: "🎭",
+    parts: [
+      { id: "beach_ball", name: "Beach Ball", expected: 1, image: "Bio_Images/BeachBall.png" },
+      { id: "trifold_board", name: "Trifold Board", expected: 1, image: "Bio_Images/Trifold board.png" },
+      { id: "mini_resin_animals", name: "Mini Resin Animals", expected: 1, image: "Bio_Images/Mini Resin Animals Miniature.png" },
+      { id: "glogerm_handwashing_kit", name: "GloGerm Handwashing Kit", expected: 1, image: "Bio_Images/711izcc5ZGL._SL1500_.png" },
+      { id: "brown_paper_bags", name: "Brown Paper Bags", expected: 1, image: "Bio_Images/BrownPaperBags.png" },
+    ],
+  },
+  {
+    name: "Safety",
+    icon: "🥽",
+    parts: [
+      { id: "safety_goggles", name: "Safety Goggles", expected: 1, image: "Bio_Images/Saftey Goggles.png" },
+      { id: "lab_coat", name: "Lab Coat", expected: 1, image: "Bio_Images/Lab coat.png" },
+      { id: "gloves", name: "Gloves", expected: 1, image: "Bio_Images/Gloves.png" },
+      { id: "hair_ties", name: "Hair Ties", expected: 1, image: "Bio_Images/HairTies.png" },
+      { id: "hair_net", name: "Hair Net", expected: 1, image: "Bio_Images/HairNet.png" },
+    ],
+  },
+];
+const BIO_PARTS = BIO_CATEGORIES.flatMap((c) => c.parts);
+
+function getPartsForSchool(school) {
+  return school?.courseType === "bio" ? BIO_PARTS : PARTS;
+}
+
+function getCategoriesForSchool(school) {
+  return school?.courseType === "bio" ? BIO_CATEGORIES : CATEGORIES;
+}
+
 // ========== STATE ==========
 let currentUser = null, // FULL EMAIL
   userRole = null,
@@ -162,6 +327,7 @@ let inventoryData = {},
 
 let currentFilter = "all",
   currentSemester = "start",
+  currentCourseFilter = "",
   editingSchoolId = null,
   editingKitId = null;
 
@@ -252,7 +418,7 @@ const loadData = async () => {
   // Schools
   let { data: schoolRows, error: sErr } = await db
     .from("schools")
-    .select("school_id,user_id,name,start_deadline,end_deadline,created_at")
+    .select("school_id,user_id,name,start_deadline,end_deadline,created_at,course_type")
     .order("created_at", { ascending: true });
 
   if (sErr) {
@@ -266,6 +432,10 @@ const loadData = async () => {
  if (userRole === "instructor") {
     const myId = currentUserId;
     schoolRows = myId ? (schoolRows || []).filter((s) => s.user_id === myId) : [];
+  }
+
+  if (isAdmin() && currentCourseFilter) {
+    schoolRows = (schoolRows || []).filter((s) => s.course_type === currentCourseFilter);
   }
 
   // Kits
@@ -295,6 +465,18 @@ const loadData = async () => {
     return;
   }
 
+  const { data: bioPartCountRows, error: bioPcErr } = await db
+    .from("bio_part_counts")
+    .select("kit_id,part_id,start_actual,end_actual,last_updated_by,last_updated_at");
+
+  if (bioPcErr) {
+    console.error(bioPcErr);
+    alert("Load bio part counts failed: " + bioPcErr.message);
+    schools = [];
+    inventoryData = {};
+    return;
+  }
+
   // Build school → kits
   const kitsBySchool = {};
   (kitRows || []).forEach((k) => {
@@ -308,6 +490,7 @@ const loadData = async () => {
     id: s.school_id,
     userId: s.user_id,
     name: s.name,
+    courseType: s.course_type || "robotics",
     startDeadline: s.start_deadline,
     endDeadline: s.end_deadline,
     kits: kitsBySchool[s.school_id] || [],
@@ -316,6 +499,13 @@ const loadData = async () => {
   // Flatten counts
   inventoryData = {};
   (partCountRows || []).forEach((pc) => {
+    inventoryData[invKey(pc.kit_id, pc.part_id)] = {
+      start: pc.start_actual ?? "",
+      end: pc.end_actual ?? "",
+    };
+  });
+
+  (bioPartCountRows || []).forEach((pc) => {
     inventoryData[invKey(pc.kit_id, pc.part_id)] = {
       start: pc.start_actual ?? "",
       end: pc.end_actual ?? "",
@@ -361,6 +551,7 @@ function showScreen(id) {
     if (el) el.textContent = (currentUser || "").split("@")[0];
   } else if (id === "school-screen") {
     updateRoleBadge();
+    updateCourseFilterUI();
     renderSchools();
   } else if (id === "kit-screen") {
     currentFilter = "all";
@@ -370,6 +561,7 @@ function showScreen(id) {
     renderInventory();
     updateInventoryUI();
   } else if (id === "dashboard-screen") {
+    updateCourseFilterUI();
     renderDashboard();
   }
 }
@@ -400,6 +592,11 @@ function updateRoleBadge() {
   b.className = "role-badge " + userRole;
 
   document.getElementById("user-display").textContent = (currentUser || "").split("@")[0];
+
+  const schoolFilters = document.getElementById("school-course-filters");
+  const dashboardFilters = document.getElementById("dashboard-course-filters");
+  if (schoolFilters) schoolFilters.style.display = isAdmin() ? "flex" : "none";
+  if (dashboardFilters) dashboardFilters.style.display = isAdmin() ? "flex" : "none";
 
   // ✅ remove/hide Add School button for instructors (and kill click)
   const addBtn = document.getElementById("add-school-btn");
@@ -437,6 +634,31 @@ function updateRoleBadge() {
   } else {
     const btn = document.getElementById("manage-instructors-btn");
     if (btn) btn.style.display = "none";
+  }
+}
+
+function updateCourseFilterUI() {
+  document.querySelectorAll("[data-course-filter]").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.courseFilter === currentCourseFilter);
+  });
+}
+
+async function setCourseFilter(courseType) {
+  currentCourseFilter = courseType || "";
+  updateCourseFilterUI();
+
+  const prevSchoolId = currentSchool?.id || null;
+  const prevKitId = currentKit?.id || null;
+
+  await loadData();
+  restoreSelection(prevSchoolId, prevKitId);
+
+  const activeScreen = document.querySelector(".screen.active")?.id;
+  if (activeScreen === "dashboard-screen") {
+    renderDashboard();
+  } else {
+    renderSchools();
+    filterSchools();
   }
 }
 
@@ -556,6 +778,7 @@ async function addSchool() {
   if (!isAdmin()) return;
 
   const name = document.getElementById("new-school-name").value.trim();
+  const courseType = document.getElementById("new-school-course-type").value || "robotics";
   if (!name) {
     alert("Enter school name");
     return;
@@ -566,6 +789,7 @@ async function addSchool() {
     .insert({
       name: name,
       user_id: currentUserId || null,
+      course_type: courseType,
       start_deadline:
         document.getElementById("new-school-start-deadline").value || null,
       end_deadline:
@@ -581,6 +805,7 @@ async function addSchool() {
   }
 
   closeModal("add-school-modal");
+  document.getElementById("new-school-course-type").value = "robotics";
 
   await loadData();
 
@@ -668,7 +893,8 @@ async function deleteKit(kitId) {
 
   if (!confirm("Delete this kit?")) return;
 
-  await db.from("part_counts").delete().eq("kit_id", kitId);
+  const tableName = currentSchool.courseType === "bio" ? "bio_part_counts" : "part_counts";
+  await db.from(tableName).delete().eq("kit_id", kitId);
   await db.from("part_count_audit").delete().eq("kit_id", kitId);
 
   const { error } = await db
@@ -780,11 +1006,16 @@ function renderKits() {
     .join("");
 }
 
-function getKitStatus(_sid, kid) {
+function getKitStatus(schoolOrId, kid) {
+  const school =
+    typeof schoolOrId === "object"
+      ? schoolOrId
+      : schools.find((s) => s.id === schoolOrId) || currentSchool;
   let endFilled = 0,
     hasIssue = false;
+  const parts = getPartsForSchool(school);
 
-  PARTS.forEach((p) => {
+  parts.forEach((p) => {
     const d = inventoryData[invKey(kid, p.id)];
     if (d) {
       if (d.end !== undefined && d.end !== "") {
@@ -795,16 +1026,21 @@ function getKitStatus(_sid, kid) {
     }
   });
 
-  const total = PARTS.length;
+  const total = parts.length;
   if (hasIssue) return "issues";
   if (endFilled === total) return "complete";
   return "pending";
 }
 
 function getMissing(_sid, kid) {
+  const school =
+    typeof _sid === "object"
+      ? _sid
+      : schools.find((s) => s.id === _sid) || currentSchool;
   let m = 0;
+  const parts = getPartsForSchool(school);
 
-  PARTS.forEach((p) => {
+  parts.forEach((p) => {
     const d = inventoryData[invKey(kid, p.id)];
     if (d && d.end !== undefined && d.end !== "") {
       const sv = d.start !== "" && d.start !== undefined ? parseInt(d.start) : p.expected;
@@ -881,8 +1117,9 @@ function setSemester(s) {
 function renderInventory() {
   updateSaveStatus();
   const canE = canEditSemester(currentSemester);
+  const categories = getCategoriesForSchool(currentSchool);
 
-  document.getElementById("categories").innerHTML = CATEGORIES
+  document.getElementById("categories").innerHTML = categories
     .map(
       (cat) => `
       <div class="category">
@@ -913,6 +1150,21 @@ function toggleCategory(name) {
   }
 }
 
+function getCategoryIconForPart(part) {
+  const cat = getCategoriesForSchool(currentSchool).find((c) => c.parts.includes(part));
+  return cat?.icon || "📦";
+}
+
+function renderPartIcon(part) {
+  const fallbackIcon = getCategoryIconForPart(part);
+
+  if (!part.image) {
+    return fallbackIcon;
+  }
+
+  return `<img src="${part.image}" alt="${part.name}" class="part-img" onerror="this.replaceWith(document.createTextNode('${fallbackIcon}'))">`;
+}
+
 
 
 function renderPart(part, canE) {
@@ -929,14 +1181,13 @@ function renderPart(part, canE) {
       num >= part.expected ? '<span class="part-badge ok">OK</span>' : `<span class="part-badge missing">-${part.expected - num}</span>`;
   }
 
-  const cat = CATEGORIES.find((c) => c.parts.includes(part));
   const mDis = !canE || num === null || num <= 0 ? "disabled" : "";
   const pDis = !canE || num >= part.expected ? "disabled" : "";
 
   return `<div class="part-row" data-part="${part.id}">
     <div class="part-info">
       <div class="part-icon">
-        ${part.image ? `<img src="${part.image}" alt="${part.name}" class="part-img">` : (cat?.icon || "📦")}
+        ${renderPartIcon(part)}
       </div>
       <div class="part-details">
         <div class="part-name">${part.name}</div>
@@ -966,7 +1217,7 @@ function adjust(pid, delta) {
   if (!canEditSemester(currentSemester)) return;
 
   const key = invKey(currentKit.id, pid),
-    part = PARTS.find((p) => p.id === pid);
+    part = getPartsForSchool(currentSchool).find((p) => p.id === pid);
 
   const d = inventoryData[key] || {},
     pend = pendingChanges[key] || {};
@@ -989,7 +1240,7 @@ function handleInput(inp) {
   if (!canEditSemester(currentSemester)) return;
 
   const pid = inp.dataset.part,
-    part = PARTS.find((p) => p.id === pid),
+    part = getPartsForSchool(currentSchool).find((p) => p.id === pid),
     key = invKey(currentKit.id, pid);
 
   let val = inp.value.trim();
@@ -1077,7 +1328,8 @@ async function saveChanges() {
     return;
   }
 
-  const { error } = await db.from("part_counts").upsert(rows, { onConflict: "kit_id,part_id" });
+  const tableName = currentSchool.courseType === "bio" ? "bio_part_counts" : "part_counts";
+  const { error } = await db.from(tableName).upsert(rows, { onConflict: "kit_id,part_id" });
 
   if (error) {
     console.error(error);
@@ -1107,7 +1359,7 @@ function confirmClear() {
 }
 
 function clearInventory() {
-  PARTS.forEach((p) => {
+  getPartsForSchool(currentSchool).forEach((p) => {
     const k = invKey(currentKit.id, p.id);
     if (!pendingChanges[k]) pendingChanges[k] = {};
     pendingChanges[k][currentSemester] = "";
@@ -1252,9 +1504,9 @@ function renderDashboard() {
   schools.forEach(s => {
     (s.kits || []).forEach(k => {
       totalKits++;
-      const status = getKitStatus(s.id, k.id);
+      const status = getKitStatus(s, k.id);
       if (status === "complete") completedKits++;
-      totalMissing += getMissing(s.id, k.id);
+      totalMissing += getMissing(s, k.id);
     });
   });
 
@@ -1282,7 +1534,7 @@ function renderDashboard() {
   schools.forEach(s => {
     let comp = 0, pend = 0, iss = 0;
     (s.kits || []).forEach(k => {
-      const st = getKitStatus(s.id, k.id);
+      const st = getKitStatus(s, k.id);
       if (st === "complete") comp++;
       else if (st === "issues") iss++;
       else pend++;
@@ -1333,21 +1585,20 @@ function renderDashboard() {
 
   // --- Missing Parts by Category ---
   const catMissing = {};
-  CATEGORIES.forEach(cat => {
-    let m = 0;
-    schools.forEach(s => {
-      (s.kits || []).forEach(k => {
-        cat.parts.forEach(p => {
+  schools.forEach((s) => {
+    getCategoriesForSchool(s).forEach((cat) => {
+      if (catMissing[cat.name] === undefined) catMissing[cat.name] = 0;
+      (s.kits || []).forEach((k) => {
+        cat.parts.forEach((p) => {
           const d = inventoryData[invKey(k.id, p.id)];
           if (d && d.end !== undefined && d.end !== "") {
             const sv = d.start !== "" && d.start !== undefined ? parseInt(d.start) : p.expected;
             const ev = parseInt(d.end);
-            if (ev < sv) m += sv - ev;
+            if (ev < sv) catMissing[cat.name] += sv - ev;
           }
         });
       });
     });
-    catMissing[cat.name] = m;
   });
 
   const catNames = Object.keys(catMissing);
@@ -1357,13 +1608,17 @@ function renderDashboard() {
     "rgba(210,153,34,0.7)", "rgba(248,81,73,0.7)", "rgba(88,166,255,0.4)"
   ];
 
-  const ctxMiss = document.getElementById("chart-missing").getContext("2d");
+  const missCanvas = document.getElementById("chart-missing");
+  const missWrap = missCanvas.parentElement;
+  let missEmpty = document.getElementById("chart-missing-empty");
+  const ctxMiss = missCanvas.getContext("2d");
   if (missingChart) missingChart.destroy();
 
   const hasMissingData = catValues.some(v => v > 0);
 
   if (hasMissingData) {
-    document.getElementById("chart-missing").style.display = "block";
+    missCanvas.style.display = "block";
+    if (missEmpty) missEmpty.remove();
     missingChart = new Chart(ctxMiss, {
       type: "doughnut",
       data: {
@@ -1388,15 +1643,21 @@ function renderDashboard() {
       },
     });
   } else {
-    document.getElementById("chart-missing").style.display = "none";
-    document.getElementById("chart-missing").parentElement.innerHTML = '<div class="dash-empty">No missing parts yet — complete end-of-semester counts to see data here</div>';
+    missCanvas.style.display = "none";
+    if (!missEmpty) {
+      missEmpty = document.createElement("div");
+      missEmpty.id = "chart-missing-empty";
+      missEmpty.className = "dash-empty";
+      missWrap.appendChild(missEmpty);
+    }
+    missEmpty.textContent = "No missing parts yet — complete end-of-semester counts to see data here";
   }
 
   // --- Top Missing Parts List ---
   const partMissing = [];
   schools.forEach(s => {
     (s.kits || []).forEach(k => {
-      PARTS.forEach(p => {
+      getPartsForSchool(s).forEach(p => {
         const d = inventoryData[invKey(k.id, p.id)];
         if (d && d.end !== undefined && d.end !== "") {
           const sv = d.start !== "" && d.start !== undefined ? parseInt(d.start) : p.expected;

@@ -1153,6 +1153,7 @@
     <div id="school-screen" class="screen">
       <div class="header">
         <div class="header-top">
+          <button class="btn btn-small btn-secondary" onclick="showScreen('menu-screen')" style="width:auto;">← Back</button>
           <h1 class="page-title">Schools</h1>
           <div style="display:flex;align-items:center;gap:8px;">
             <button class="btn btn-small btn-secondary" onclick="openAirtable()" style="width:auto;">Airtable</button>
@@ -1163,6 +1164,11 @@
       <div class="search-box">
         <span>🔍</span>
         <input type="text" id="school-search" placeholder="Search schools..." oninput="filterSchools()">
+      </div>
+      <div class="filters" id="school-course-filters" style="display:none; padding: 0 20px 12px;">
+        <button class="filter-btn active" data-course-filter="" onclick="setCourseFilter('')">All</button>
+        <button class="filter-btn" data-course-filter="robotics" onclick="setCourseFilter('robotics')">Robotics</button>
+        <button class="filter-btn" data-course-filter="bio" onclick="setCourseFilter('bio')">Bio</button>
       </div>
       <div class="list-container" id="school-list"></div>
       <div id="school-empty" class="empty-state" style="display:none;">
@@ -1180,6 +1186,9 @@
     <!-- Kits Screen -->
     <div id="kit-screen" class="screen">
       <div class="header">
+        <div class="header-top">
+          <button class="btn btn-small btn-secondary" onclick="showScreen('school-screen')" style="width:auto;">← Back</button>
+        </div>
         <div class="header-nav">
           <a href="#" onclick="showScreen('school-screen');return false;">Schools</a>
           <span class="sep">›</span>
@@ -1212,6 +1221,9 @@
     <!-- Inventory Screen -->
     <div id="inventory-screen" class="screen">
       <div class="header">
+        <div class="header-top">
+          <button class="btn btn-small btn-secondary" onclick="goBack()" style="width:auto;">← Back</button>
+        </div>
         <div class="header-nav">
           <a href="#" onclick="showScreen('school-screen');return false;">Schools</a>
           <span class="sep">›</span>
@@ -1251,6 +1263,11 @@
         <button class="btn btn-small btn-secondary" onclick="showScreen('menu-screen')" style="width:auto;">← Back</button>
       </div>
     </div>
+    <div class="filters" id="dashboard-course-filters" style="display:none; padding: 0 20px 12px;">
+      <button class="filter-btn active" data-course-filter="" onclick="setCourseFilter('')">All</button>
+      <button class="filter-btn" data-course-filter="robotics" onclick="setCourseFilter('robotics')">Robotics</button>
+      <button class="filter-btn" data-course-filter="bio" onclick="setCourseFilter('bio')">Bio</button>
+    </div>
     <div class="dash-stats" id="dash-stats"></div>
     <div style="flex:1;overflow-y:auto;">
       <div class="dash-chart-card">
@@ -1273,6 +1290,13 @@
       <div class="form-group">
         <label>School Name</label>
         <input type="text" id="new-school-name" placeholder="e.g. Lincoln Elementary">
+      </div>
+      <div class="form-group">
+        <label>Course Type</label>
+        <select id="new-school-course-type">
+          <option value="robotics">Robotics</option>
+          <option value="bio">Bio</option>
+        </select>
       </div>
       <div class="form-row">
         <div class="form-group">
