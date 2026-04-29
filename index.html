@@ -1321,6 +1321,29 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="edit-school-modal">
+    <div class="modal">
+      <h2>School Settings</h2>
+      <div class="form-group">
+        <label>School Name</label>
+        <input type="text" id="edit-school-name" placeholder="e.g. Lincoln Elementary">
+      </div>
+      <div class="form-group">
+        <label>Start Deadline</label>
+        <input type="date" id="edit-school-start-deadline">
+      </div>
+      <div class="form-group">
+        <label>End Deadline</label>
+        <input type="date" id="edit-school-end-deadline">
+      </div>
+      <p class="help-text">Instructors cannot edit inventory after these dates.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal('edit-school-modal')">Cancel</button>
+        <button class="btn" onclick="saveSchoolSettings()">Save</button>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-overlay" id="confirm-clear-modal">
     <div class="modal">
       <h2>Clear Inventory?</h2>

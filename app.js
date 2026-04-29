@@ -604,15 +604,12 @@ function updateRoleBadge() {
       addBtn.style.display = "block";
       addBtn.disabled = false;
       addBtn.style.pointerEvents = "auto";
-      addBtn.onclick = addBtn.onclick || null;
+      addBtn.onclick = () => openModal("add-school-modal");
     } else {
       addBtn.style.display = "none";
       addBtn.disabled = true;
       addBtn.style.pointerEvents = "none";
-      addBtn.onclick = (e) => {
-        if (e) e.preventDefault();
-        return false;
-      };
+      addBtn.onclick = null;
     }
   }
 
@@ -854,7 +851,48 @@ async function deleteSchool(schoolId) {
 
 
 function openSchoolSettings() {
-  alert("Settings coming soon.");
+  if (!currentSchool) return;
+  document.getElementById("edit-school-name").value = currentSchool.name;
+  document.getElementById("edit-school-start-deadline").value = currentSchool.startDeadline || "";
+  document.getElementById("edit-school-end-deadline").value = currentSchool.endDeadline || "";
+  openModal("edit-school-modal");
+}
+
+async function saveSchoolSettings() {
+  if (!isAdmin() || !currentSchool) return;
+
+  const name = document.getElementById("edit-school-name").value.trim();
+  if (!name) { alert("School name is required"); return; }
+
+  const startDeadline = document.getElementById("edit-school-start-deadline").value || null;
+  const endDeadline   = document.getElementById("edit-school-end-deadline").value   || null;
+
+  const { data, error } = await db
+    .from("schools")
+    .upsert(
+      {
+        school_id:       currentSchool.id,
+        name,
+        start_deadline:  startDeadline,
+        end_deadline:    endDeadline,
+        user_id:         currentSchool.userId,
+        course_type:     currentSchool.courseType,
+      },
+      { onConflict: "school_id" }
+    )
+    .select();
+
+  if (error) { alert("Save failed: " + error.message); return; }
+  if (!data?.length) { alert("Save was blocked — no rows updated. Check Supabase RLS policies for the schools table."); return; }
+
+  closeModal("edit-school-modal");
+
+  const prevSchoolId = currentSchool.id;
+  await loadData();
+  currentSchool = schools.find((s) => s.id === prevSchoolId);
+
+  document.getElementById("nav-school-name").textContent  = currentSchool.name;
+  document.getElementById("nav-school-name2").textContent = currentSchool.name;
 }
 
 async function addKit() {
