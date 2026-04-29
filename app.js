@@ -518,8 +518,6 @@ const loadData = async () => {
   }
 };
 
-const saveData = () => {};
-
 // ========== AUTH (PASSWORD-ONLY UI) ==========
 function logout() {
   if (hasUnsavedChanges && !confirm("Unsaved changes will be lost. Continue?")) return;
@@ -532,7 +530,6 @@ function logout() {
   currentKit = null;
 
   localStorage.removeItem("js_user");
-  localStorage.removeItem("js_role");
 
   document.getElementById("email-input").value = "";
   document.getElementById("password-input").value = "";
@@ -546,9 +543,10 @@ function showScreen(id) {
   document.getElementById(id).classList.add("active");
 
   if (id === "menu-screen") {
-    // optional: only works if you add <span id="menu-user-display"></span> in HTML
     const el = document.getElementById("menu-user-display");
     if (el) el.textContent = (currentUser || "").split("@")[0];
+    const dashBtn = document.getElementById("dashboard-menu-btn");
+    if (dashBtn) dashBtn.style.display = isAdmin() ? "block" : "none";
   } else if (id === "school-screen") {
     updateRoleBadge();
     updateCourseFilterUI();
@@ -828,6 +826,7 @@ async function deleteSchool(schoolId) {
     const kitIds = kits.map(k => k.kit_id);
 
     await db.from("part_counts").delete().in("kit_id", kitIds);
+    await db.from("bio_part_counts").delete().in("kit_id", kitIds);
     await db.from("part_count_audit").delete().in("kit_id", kitIds);
     await db.from("kits").delete().in("kit_id", kitIds);
   }
@@ -1415,8 +1414,6 @@ document.querySelectorAll(".modal-overlay").forEach((m) =>
     userRole = user.role;
     currentUserId = user.user_id;
 
-    localStorage.setItem("js_role", userRole);
-
     await loadData();
     
 
@@ -1471,7 +1468,6 @@ document.getElementById("login-form").addEventListener("submit", async function 
   currentUserId = user.user_id;
 
   localStorage.setItem("js_user", currentUser);
-  localStorage.setItem("js_role", userRole);
 
   await loadData();
   
