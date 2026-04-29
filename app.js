@@ -39,11 +39,12 @@ async function registerPush() {
 
     const messaging = messagingLib.getMessaging(app);
 
-    // Unregister any old service workers first
-    // Unregister ALL service workers first to prevent duplicates
+    // Only unregister the Firebase SW if already registered; leave the app SW intact
     const registrations = await navigator.serviceWorker.getRegistrations();
     for (const reg of registrations) {
-      await reg.unregister();
+      if (reg.active?.scriptURL.includes("firebase-messaging-sw.js")) {
+        await reg.unregister();
+      }
     }
 
     const registration = await navigator.serviceWorker.register("./firebase-messaging-sw.js");
@@ -615,6 +616,9 @@ function updateRoleBadge() {
     }
   }
 
+  const addEmptyBtn = document.getElementById("add-school-empty-btn");
+  if (addEmptyBtn) addEmptyBtn.style.display = isAdmin() ? "block" : "none";
+
   // Admin-only Manage Instructors button (created once)
   if (isAdmin()) {
     let btn = document.getElementById("manage-instructors-btn");
@@ -803,7 +807,10 @@ async function addSchool() {
   }
 
   closeModal("add-school-modal");
+  document.getElementById("new-school-name").value = "";
   document.getElementById("new-school-course-type").value = "robotics";
+  document.getElementById("new-school-start-deadline").value = "";
+  document.getElementById("new-school-end-deadline").value = "";
 
   await loadData();
 
@@ -850,8 +857,6 @@ function openSchoolSettings() {
   alert("Settings coming soon.");
 }
 
-// Add kit to current school
-// Add kit to current school
 async function addKit() {
   if (!currentSchool) return;
 
@@ -877,6 +882,7 @@ async function addKit() {
   }
 
   closeModal("add-kit-modal");
+  document.getElementById("new-kit-name").value = "";
 
   const schoolId = currentSchool.id;
 
@@ -1283,7 +1289,7 @@ async function saveChanges() {
 
   for (const key of Object.keys(pendingChanges)) {
     const change = pendingChanges[key];
-    if (change[currentSemester] === undefined) continue;
+    if (change.start === undefined && change.end === undefined) continue;
 
     const parsed = parseInvKey(key);
     if (!parsed) continue;
@@ -1291,24 +1297,13 @@ async function saveChanges() {
     const { kit_id, part_id } = parsed;
     if (kit_id !== currentKit.id) continue;
 
-    const val = change[currentSemester];
-    const num = val === "" || val === null || val === undefined ? null : Number(val);
-
     const existing = inventoryData[key] || {};
 
-    const start_actual =
-      currentSemester === "start"
-        ? num
-        : existing.start === "" || existing.start === undefined
-        ? null
-        : Number(existing.start);
+    const startSrc = change.start !== undefined ? change.start : existing.start;
+    const endSrc   = change.end   !== undefined ? change.end   : existing.end;
 
-    const end_actual =
-      currentSemester === "end"
-        ? num
-        : existing.end === "" || existing.end === undefined
-        ? null
-        : Number(existing.end);
+    const start_actual = startSrc === "" || startSrc == null ? null : Number(startSrc);
+    const end_actual   = endSrc   === "" || endSrc   == null ? null : Number(endSrc);
 
     rows.push({
       kit_id,
